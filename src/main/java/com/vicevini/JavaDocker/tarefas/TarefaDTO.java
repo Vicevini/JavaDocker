@@ -18,10 +18,6 @@ public class TarefaDTO {
     @NotNull(message = "O campo Prioridade não pode ser nulo.")
     private Integer prioridade;
 
-    @Email(message = "Formato inválido de e-mail")
-    @NotNull(message = "O campo E-mail não pode ser nulo.")
-    private String email;
-
     @NotNull(message = "O campo Usuario não pode ser nulo.")
     private String usuario;
 
@@ -65,11 +61,4 @@ public class TarefaDTO {
         this.usuario = usuario;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
 }
