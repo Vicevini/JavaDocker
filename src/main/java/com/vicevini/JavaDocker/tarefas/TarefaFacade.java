@@ -1,6 +1,9 @@
 package com.vicevini.JavaDocker.tarefas;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,11 +13,15 @@ import java.util.stream.Collectors;
 public class TarefaFacade {
     @Autowired
     private TarefaRepository repository;
+    @Autowired
+    private TarefaQueryRepository queryRepository;
 
     public TarefaDTO criar(TarefaDTO tarefaDTO) {
         Tarefa tarefa = new Tarefa();
         tarefa.setDescricao(tarefaDTO.getDescricao());
         tarefa.setTitulo(tarefaDTO.getTitulo());
+        tarefa.setPrioridade(tarefaDTO.getPrioridade());
+        tarefa.setUsuario(tarefaDTO.getUsuario());
         repository.save(tarefa);
         tarefaDTO.setId(tarefa.getId());
         return  tarefaDTO;
@@ -23,7 +30,8 @@ public class TarefaFacade {
     public TarefaDTO atualizar (TarefaDTO tarefaDTO, Long tarefaId) {
         Tarefa tarefaDatabase = repository.getOne(tarefaId);
         tarefaDatabase.setTitulo(tarefaDTO.getTitulo());
-        tarefaDatabase.setDescricao(tarefaDTO.getTitulo());
+        tarefaDatabase.setDescricao(tarefaDTO.getDescricao());
+        tarefaDatabase.setPrioridade(tarefaDTO.getPrioridade());
         repository.save(tarefaDatabase);
         return tarefaDTO;
     }
@@ -46,5 +54,10 @@ public class TarefaFacade {
     public String delete (Long tarefaId) {
         repository.deleteById(tarefaId);
         return "DELETED";
+    }
+
+    private  void metodosQuery(){
+        Pageable pageable = PageRequest.of(0,5, Sort.by("prioridade").descending() );
+        List<Tarefa> tarefas = repository.findByUsuario("vini", pageable);
     }
 }

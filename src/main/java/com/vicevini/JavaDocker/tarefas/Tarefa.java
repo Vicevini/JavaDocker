@@ -11,6 +11,8 @@ public class Tarefa {
     private Long id;
     private String titulo;
     private String descricao;
+    private Integer prioridade;
+    private String usuario;
 
     public Long getId() {
         return id;
@@ -34,5 +36,21 @@ public class Tarefa {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public Integer getPrioridade() {
+        return prioridade;
+    }
+
+    public void setPrioridade(Integer prioridade) {
+        this.prioridade = prioridade;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
 }

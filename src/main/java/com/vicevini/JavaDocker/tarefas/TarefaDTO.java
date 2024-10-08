@@ -22,6 +22,9 @@ public class TarefaDTO {
     @NotNull(message = "O campo E-mail não pode ser nulo.")
     private String email;
 
+    @NotNull(message = "O campo Usuario não pode ser nulo.")
+    private String usuario;
+
     public Long getId() {
         return id;
     }
@@ -52,6 +55,14 @@ public class TarefaDTO {
 
     public void setPrioridade(Integer prioridade) {
         this.prioridade = prioridade;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
 
     public String getEmail() {
